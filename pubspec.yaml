@@ -37,7 +37,6 @@ dependencies:
     git:
       url: git://github.com/FlutterFlow/flutter-braintree.git
       ref: master
-  flutter_credit_card: ^2.0.0
   font_awesome_flutter:
   google_fonts: ^2.1.0
   google_sign_in: ^4.5.9
