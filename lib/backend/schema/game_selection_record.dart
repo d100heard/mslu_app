@@ -12,22 +12,54 @@ abstract class GameSelectionRecord
       _$gameSelectionRecordSerializer;
 
   @nullable
+  @BuiltValueField(wireName: 'created_time')
+  DateTime get createdTime;
+
+  @nullable
+  @BuiltValueField(wireName: 'No1')
+  String get no1;
+
+  @nullable
+  @BuiltValueField(wireName: 'No2')
+  String get no2;
+
+  @nullable
+  @BuiltValueField(wireName: 'No3')
+  String get no3;
+
+  @nullable
   @BuiltValueField(wireName: 'user_id')
-  DocumentReference get userId;
+  String get userId;
 
   @nullable
   @BuiltValueField(wireName: 'user_name')
-  DocumentReference get userName;
+  String get userName;
 
   @nullable
-  @BuiltValueField(wireName: 'created_time')
-  DateTime get createdTime;
+  @BuiltValueField(wireName: 'No1_image')
+  String get no1Image;
+
+  @nullable
+  @BuiltValueField(wireName: 'no2_image')
+  String get no2Image;
+
+  @nullable
+  @BuiltValueField(wireName: 'no3_image')
+  String get no3Image;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(GameSelectionRecordBuilder builder) => builder;
+  static void _initializeBuilder(GameSelectionRecordBuilder builder) => builder
+    ..no1 = ''
+    ..no2 = ''
+    ..no3 = ''
+    ..userId = ''
+    ..userName = ''
+    ..no1Image = ''
+    ..no2Image = ''
+    ..no3Image = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('game_selection');
@@ -48,13 +80,25 @@ abstract class GameSelectionRecord
 }
 
 Map<String, dynamic> createGameSelectionRecordData({
-  DocumentReference userId,
-  DocumentReference userName,
   DateTime createdTime,
+  String no1,
+  String no2,
+  String no3,
+  String userId,
+  String userName,
+  String no1Image,
+  String no2Image,
+  String no3Image,
 }) =>
     serializers.toFirestore(
         GameSelectionRecord.serializer,
         GameSelectionRecord((g) => g
+          ..createdTime = createdTime
+          ..no1 = no1
+          ..no2 = no2
+          ..no3 = no3
           ..userId = userId
           ..userName = userName
-          ..createdTime = createdTime));
+          ..no1Image = no1Image
+          ..no2Image = no2Image
+          ..no3Image = no3Image));

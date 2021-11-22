@@ -6,11 +6,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/credits_record.dart';
-import 'schema/wales_squad_record.dart';
 import 'schema/game_selection_record.dart';
-import 'schema/no1_record.dart';
-import 'schema/no2_record.dart';
-import 'schema/no3_record.dart';
+import 'schema/wales_squad_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,11 +16,8 @@ export 'schema/serializers.dart';
 
 export 'schema/users_record.dart';
 export 'schema/credits_record.dart';
-export 'schema/wales_squad_record.dart';
 export 'schema/game_selection_record.dart';
-export 'schema/no1_record.dart';
-export 'schema/no2_record.dart';
-export 'schema/no3_record.dart';
+export 'schema/wales_squad_record.dart';
 
 Stream<List<UsersRecord>> queryUsersRecord(
         {Query Function(Query) queryBuilder,
@@ -39,13 +33,6 @@ Stream<List<CreditsRecord>> queryCreditsRecord(
     queryCollection(CreditsRecord.collection, CreditsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Stream<List<WalesSquadRecord>> queryWalesSquadRecord(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(WalesSquadRecord.collection, WalesSquadRecord.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
 Stream<List<GameSelectionRecord>> queryGameSelectionRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
@@ -54,25 +41,11 @@ Stream<List<GameSelectionRecord>> queryGameSelectionRecord(
         GameSelectionRecord.collection, GameSelectionRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Stream<List<No1Record>> queryNo1Record(
+Stream<List<WalesSquadRecord>> queryWalesSquadRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(No1Record.collection, No1Record.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
-Stream<List<No2Record>> queryNo2Record(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(No2Record.collection, No2Record.serializer,
-        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
-
-Stream<List<No3Record>> queryNo3Record(
-        {Query Function(Query) queryBuilder,
-        int limit = -1,
-        bool singleRecord = false}) =>
-    queryCollection(No3Record.collection, No3Record.serializer,
+    queryCollection(WalesSquadRecord.collection, WalesSquadRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(
@@ -98,13 +71,13 @@ Stream<List<T>> queryCollection<T>(
 
 // Creates a Firestore record representing the logged in user if it doesn't yet exist
 Future maybeCreateUser(User user) async {
-  final userRecord = WalesSquadRecord.collection.doc(user.uid);
+  final userRecord = UsersRecord.collection.doc(user.uid);
   final userExists = await userRecord.get().then((u) => u.exists);
   if (userExists) {
     return;
   }
 
-  final userData = createWalesSquadRecordData(
+  final userData = createUsersRecordData(
     email: user.email,
     displayName: user.displayName,
     photoUrl: user.photoURL,

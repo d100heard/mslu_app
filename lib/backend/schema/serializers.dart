@@ -2,11 +2,8 @@ import 'package:built_value/standard_json_plugin.dart';
 
 import 'users_record.dart';
 import 'credits_record.dart';
-import 'wales_squad_record.dart';
 import 'game_selection_record.dart';
-import 'no1_record.dart';
-import 'no2_record.dart';
-import 'no3_record.dart';
+import 'wales_squad_record.dart';
 
 import 'index.dart';
 
@@ -19,11 +16,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
 @SerializersFor(const [
   UsersRecord,
   CreditsRecord,
-  WalesSquadRecord,
   GameSelectionRecord,
-  No1Record,
-  No2Record,
-  No3Record,
+  WalesSquadRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
